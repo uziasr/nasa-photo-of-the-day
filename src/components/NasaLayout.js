@@ -11,7 +11,7 @@ export const NasaLayout = (props) =>{
                 <h1>{props.title}</h1>
                 <p>{props.explanation}</p> 
                 <p>Date: {props.date}</p>
-                <button>Yesterday</button>
+                {/* <button>Yesterday</button> */}
             </div>
 
         </div>

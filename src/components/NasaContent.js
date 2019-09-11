@@ -6,9 +6,11 @@ import axios from "axios";
 export default function NasaContent(){
     const [date, setDate] = useState(dateFormat())
     const [nasaObject, setNasaObject] = useState({})
+    const url = 'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date='
     
     function dateFormat(today=(new Date())){
         //let today = new Date()
+        //console.log('this is the the date',today)
         if(today=(new Date())){
         let month = (today.getUTCMonth() + 1);
         let day = today.getUTCDate();
@@ -22,8 +24,8 @@ export default function NasaContent(){
     function previousDay(aDate){
         let date = aDate.split('-')
         date[2] = date[2] - 1 
-        setDate(aDate.join('-'))
-        aDate.join('-')
+        console.log(date.join('-'))
+        return(date.join('-'))
     }
 
     function isToday(){
@@ -32,15 +34,16 @@ export default function NasaContent(){
     console.log(isToday())
     
     useEffect(()=>{
+    
     axios
-    .get(`https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=${date}`)
+    .get(`${url}${date}`)
     .then(response => {
         const nasaData = response.data;
         setNasaObject(nasaData)
-        console.log(setNasaObject)
+        console.log(`${url}${date}`)
     })
     .catch(error=>console.log(error))
-    },[])
+    },[date])
     return(
         <div className='article'>
             <NasaLayout id={1}
@@ -50,7 +53,7 @@ export default function NasaContent(){
             explanation = {nasaObject.explanation}
             date = {nasaObject.date}
             />
-            {/* <button onClick={previousDay(date)}>Yesterday</button> */}
+            <button onClick={() =>{ setDate(previousDay(date))} }>Yesterday</button>
         </div>
     )
 }
