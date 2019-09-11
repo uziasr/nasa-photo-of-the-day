@@ -31,3 +31,22 @@
     transform: rotate(360deg);
   }
 }
+
+.mainImage{
+  width:60%;
+}
+
+.article-list{
+  display:flex;
+  align-items: center;
+  align-content: center;
+}
+
+.leftContent{
+  width:60%;
+  marign: 3%;
+}
+.rightContent{
+  width: 30%;
+  marign: 3%;
+}
