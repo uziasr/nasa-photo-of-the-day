@@ -9,14 +9,16 @@ background:dodgerblue;
 padding: 1% 2%;
 border-radius: 25px;
 color: white;
-margin-bottom: 4%;
+margin: 4%;
+background: ${props =>(props.primary ? 'mediumseagreen':'dodgerblue')};
+
 `
 
 
 export default function NasaContent(){
     const [date, setDate] = useState(dateFormat())
     const [nasaObject, setNasaObject] = useState({})
-    const url = 'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date='
+    const url = 'https://api.nasa.gov/planetary/apod?api_key=tRWYPgRzOvaw9eQCaToqj4hjDnidZ1x16pZtxTr3&date='
     
     function dateFormat(today=(new Date())){
         //Sets the todays date to url friendly date
@@ -33,9 +35,17 @@ export default function NasaContent(){
     function previousDay(aDate){
         //for use in button, goes back a day
         let date = aDate.split('-')
+        if (date[2]>1){
         date[2] = date[2] - 1 
         console.log(date.join('-'))
         return(date.join('-'))
+    }
+    else{
+        date[1] = date[1] - 1 
+        date[2] = 31
+        console.log(date.join('-'))
+        return(date.join('-'))
+    }
     }
 
     function nextDay(aDate){
@@ -49,17 +59,9 @@ export default function NasaContent(){
     function isToday(){
         //returns true if day is today
         // console.log(dateFormat(), dateFormat(date))
-        console.log('isToday', date)
-
         return (dateFormat()===dateFormat(date))
     }
-    function tomorrowButton(){
-        if(!isToday()){
-            return  <button onClick={() =>{ setDate(nextDay(date))} }>Tomorrow</button>
-        }
-    }
 
-    console.log(isToday())
     
     useEffect(()=>{
     
@@ -83,7 +85,8 @@ export default function NasaContent(){
             explanation = {nasaObject.explanation}
             date = {nasaObject.date}
             />
-            <GoodButton color='primary' onClick={() =>{ setDate(previousDay(date))} }>Yesterday</GoodButton>
+            <GoodButton onClick={() =>{ setDate(previousDay(date))} }>Yesterday</GoodButton>
+            <GoodButton primary onClick={() =>{ setDate(nextDay(date))} }>Tomorrow</GoodButton>
             {/* {tomorrowButton()} */}
             </Row>  
         </Container>  

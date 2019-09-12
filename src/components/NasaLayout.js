@@ -10,26 +10,42 @@ const NewCardText =styled.div`
   margin: 2% auto;
 `
 const TextContent = styled.div`
-width: 70%;
+width: 45%;
 margin: 3% auto;
 align-self: center;
 `
 const Image = styled.img`
-width:60%;
+width:80%;
+`
+const Wrapper = styled.div`
+  display:flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  margin-top:5%;
+  margin: 3% auto;
+  
+`
+const RightSide = styled.div`
+width:45%;
 `
 
 export const NasaLayout = (props) =>{
         return(
-        <div>
-            <Image className='mainImage' src={props.hdurl} alt='Space'/>
-            <p>Photo credits: {props.copyright}</p>
-            <TextContent>
-                <h1>{props.title}</h1>
-                <p>{props.explanation}</p> 
-                <p>Date: {props.date}</p>
-                {/* <button>Yesterday</button> */}
-            </TextContent>
-        </div>
+        <Wrapper>
+            <div>
+                <Image className='mainImage' src={props.hdurl} alt='Space'/>
+                <p>Photo credits: {props.copyright}</p>
+            </div>
+            <div>
+                <TextContent>
+                    <h1>{props.title}</h1>
+                    <p>{props.explanation}</p> 
+                    <p>Date: {props.date}</p>
+                    {/* <button>Yesterday</button> */}
+                </TextContent>
+            </div>
+        </Wrapper>
     )
     // return (
     //     <div>
